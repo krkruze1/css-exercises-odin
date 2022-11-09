@@ -20,6 +20,12 @@ body {
   width: 480px;
   border-radius: 10px;
   box-shadow: 2px 4px 16px rgba(0,0,0,.2);
+  padding: 16px;
+  display: flex;
+  /*flex: 0 0 auto; not necessary since once icon is prevented from shrinking the contents
+  will take up the rest of the available space.  The available space is going to be the width
+  since default flex basis is auto.*/
+  gap: 16px;
 }
 
 .icon {
@@ -33,6 +39,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink:0; /*makes flex: 0 0 auto; under .modal irrelevant*/
 }
 
 .close-button {
@@ -64,3 +71,29 @@ button.cancel {
   border: 1px solid #ddd;
   color: royalblue;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  /*justify-content: center; Unnecessary*/
+}
+
+.header-and-close {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: large;
+}
+/*my method is inefficient. official solution puts the cancel button as a div inside 
+the header. This makes the header text and the cancel button two separete flex items in header. 
+My way makes the header div and close button div two flex items in .header-and-close div 
+Also I forgot that buttons are inline blocks so I put them in a container div together 
+and made the content div a flex box.  When I tested removing the button container div
+the content div flex box and column direction made the buttons occupy separate rows
+making the button container div seem neccessary. The only useful thing the content div flex
+box provided was the gap property which the official solution replaces with margin bottoms
+under .header and .text.
+one minor difference noted is that my solution makes the gap between header, text,
+and the buttons equal while the official solution has the distance between the txt and buttons 
+be double the distance between header and text. However this was not a written requirement*/ 
